@@ -19,18 +19,14 @@ class RequestsController < ApplicationController
     end
 
     def status
-
-
       if @request.done ==0
-        @request.update_attribute(:done, 1) # .save does not work, took me a while to find this
+        @request.update_attribute(:done, 1) # using boolean is not worth my time debugging (as it cannot change value for odd reasons), I ended up using integer instead
       else
         @request.update_attribute(:done, 0)
       end
 
 
       redirect_to requests_path, notice: "Status Changed"
-
-
     end
 
     def show
@@ -39,16 +35,12 @@ class RequestsController < ApplicationController
 
     def index
       if params[:search]
-      @requests = Request.search(params[:search]).order(:done)
+      @requests = Request.search(params[:search]).order(:done).page(params[:page]).per(2)
       else
-      @requests = Request.all
+      @requests = Request.all.order(:done).page(params[:page]).per(2)
       end
     end
 
-    def search
-      @request_search = Request.searchFor(request_search_params)
-
-    end
 
     def edit
 

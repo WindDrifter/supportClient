@@ -1,6 +1,6 @@
 class Request < ActiveRecord::Base
 
-
+  paginates_per 50
   validates :name, presence: {message: "Must be present"}
   validates :email, presence: {message: "Must be present"}
   validates :message, presence: {message: "Must be present"}
