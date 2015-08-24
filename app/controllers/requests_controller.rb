@@ -24,8 +24,6 @@ class RequestsController < ApplicationController
       else
         @request.update_attribute(:done, 0)
       end
-
-
       redirect_to requests_path, notice: "Status Changed"
     end
 
@@ -34,10 +32,13 @@ class RequestsController < ApplicationController
     end
 
     def index
+      #for simple testing I use 2 items per page, this can be changed anytime
+      items_per_page = 2
       if params[:search]
-      @requests = Request.search(params[:search]).order(:done).page(params[:page]).per(2)
+      @requests =
+       Request.search(params[:search]).order(:done).page(params[:page]).per(items_per_page)
       else
-      @requests = Request.all.order(:done).page(params[:page]).per(2)
+      @requests = Request.all.order(:done).page(params[:page]).per(items_per_page)
       end
     end
 
