@@ -1,0 +1,15 @@
+<h1><%= @request.name %></h1>
+<hr>
+<p>
+  <%= @request.message %>
+</p>
+
+
+<%= link_to "Edit",edit_request_path(@request), class: "btn btn-info"%>
+<%= link_to "Delete", request_path(@request),method: :delete, data: {confirm:"ARE YOU SURE?"}, class: "btn btn-danger" %>
+
+<% if @request.done %>
+<%= link_to "Done", request_path(@request),method: :status, data: {confirm:"Set it to undone?"}, class: "btn btn-danger" %>
+<% else %>
+<%= link_to "Undone", request_path(@request),method: :status, data: {confirm:"Set it to done?"}, class: "btn btn-danger" %>
+<% end %>

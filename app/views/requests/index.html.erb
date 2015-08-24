@@ -1,0 +1,53 @@
+<h1>
+All requests
+</h1>
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        Department
+      </th>
+      <th>
+        Message
+      </th>
+      <th>
+        action
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @requests.each do |req| %>
+    <tr>
+      <td>
+        <%= req.name %>
+      </td>
+      <td>
+        <%= link_to req.email, req.email %>
+      </td>
+      <td>
+        <%= req.department %>
+      </td>
+      <td>
+        <%= req.message %>
+      </td>
+      <td>
+        <%= link_to "Show",request_path(req), class: "btn btn-info"%>
+        <%= link_to "Edit",edit_request_path(req), class: "btn btn-info"%>
+        <%= link_to "Delete", request_path(req),method: :delete, data: {confirm:"ARE YOU SURE?"}, class: "btn btn-danger" %>
+        <% if req.done == 0 %>
+        <%= link_to "Undone", request_path(req),method: :status, data: {confirm:"Set it to Done?"}, class: "btn btn-danger" %>
+        <% else %>
+        <%= link_to "Done", request_path(req),method: :status, data: {confirm:"Set it to undone?"}, class: "btn btn-danger" %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
