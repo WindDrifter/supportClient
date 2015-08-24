@@ -23,12 +23,9 @@ class Request < ActiveRecord::Base
       limit(10)
     end
 
-    def self.searchFor(item)
-
-
+    def self.search(item)
       serach_term = "%#{item}%"
-      where(["name ILIKE :term OR message ILIKE :term",{term: serach_term}])
-
+      where(["name ILIKE :term OR email ILIKE :term OR message ILIKE :term OR department ILIKE :term",{term: serach_term}])
     end
 
 

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
 
-  resources :requests
-
+  resources :requests do
+  get 'page/:page', :action => :index, :on => :collection
+  end
 
   root "requests#index"
 

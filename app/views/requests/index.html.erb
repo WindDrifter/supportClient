@@ -3,6 +3,9 @@ All requests
 </h1>
 <hr>
 
+<hr>
+<div class="box">
+
 <table>
   <thead>
     <tr>
@@ -30,7 +33,7 @@ All requests
         <%= req.name %>
       </td>
       <td>
-        <%= link_to req.email, req.email %>
+        <%= mail_to req.email, req.email %>
       </td>
       <td>
         <%= req.department %>
@@ -43,11 +46,13 @@ All requests
         <%= link_to "Edit",edit_request_path(req), class: "btn btn-info"%>
         <%= link_to "Delete", request_path(req),method: :delete, data: {confirm:"ARE YOU SURE?"}, class: "btn btn-danger" %>
         <% if req.done == 0 %>
-        <%= link_to "Undone", request_path(req),method: :status, data: {confirm:"Set it to Done?"}, class: "btn btn-danger" %>
+        <%= link_to "Undone", request_path(req),method: :status, data: {confirm:"Set it to Done?"}, class: "btn btn-Default" %>
         <% else %>
-        <%= link_to "Done", request_path(req),method: :status, data: {confirm:"Set it to undone?"}, class: "btn btn-danger" %>
+        <%= link_to "Done", request_path(req),method: :status, data: {confirm:"Set it to undone?"}, class: "btn btn-Default" %>
         <% end %>
       </td>
     </tr>
     <% end %>
   </tbody>
+
+  </div>

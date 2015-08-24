@@ -19,6 +19,8 @@ class RequestsController < ApplicationController
     end
 
     def status
+
+
       if @request.done ==0
         @request.update_attribute(:done, 1) # .save does not work, took me a while to find this
       else
@@ -36,7 +38,15 @@ class RequestsController < ApplicationController
     end
 
     def index
+      if params[:search]
+      @requests = Request.search(params[:search]).order(:done)
+      else
       @requests = Request.all
+      end
+    end
+
+    def search
+      @request_search = Request.searchFor(request_search_params)
 
     end
 
@@ -64,6 +74,7 @@ class RequestsController < ApplicationController
       params.require(:request).permit(:name, :email, :department, :message)
       end
     end
+
 
 
     def find_request
